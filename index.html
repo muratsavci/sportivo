@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sportivo</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👟</text></svg>">
 <style>
   :root {
     --turuncu: #ff6b2c;
@@ -226,6 +227,74 @@
   .kapat:hover { background: var(--pembe); color: #fff; }
 
   footer { text-align: center; color: var(--gri); padding: 24px 16px 40px; font-size: 0.9rem; }
+
+  /* ===== Sürprizler (Claude) ===== */
+  .logo { cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+  .logo.tikla { animation: logoTik 0.25s ease-out; }
+  @keyframes logoTik { 50% { transform: scale(1.08) rotate(-3deg); } }
+
+  .rozet.secilebilir { cursor: pointer; background: #fff; font: inherit; font-weight: 700; color: var(--koyu); transition: transform 0.15s, border-color 0.15s; }
+  .rozet.secilebilir:hover { border-color: var(--pembe); color: var(--pembe); }
+  .rozet.secili { background: linear-gradient(120deg, var(--turuncu), var(--pembe)); border-color: transparent; color: #fff; transform: scale(1.1); }
+  .rozet.secili:hover { color: #fff; }
+  .pencere .gorsel svg.zipla { animation: zipla 0.6s cubic-bezier(.3,.7,.4,1); }
+  @keyframes zipla {
+    0% { transform: none; }
+    30% { transform: translateY(-28%) rotate(-12deg) scale(1.05); }
+    60% { transform: translateY(0) rotate(2deg) scale(1.08, 0.92); }
+    80% { transform: translateY(-4%) rotate(-2deg); }
+    100% { transform: none; }
+  }
+  .toz { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.85); pointer-events: none; animation: toz 0.7s ease-out forwards; }
+  @keyframes toz { to { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; } }
+
+  .kart.altin { position: relative; box-shadow: 0 0 0 3px #ffd23f, 0 18px 40px rgba(255, 190, 30, 0.45); }
+  .kart.altin .gorsel { background: linear-gradient(135deg, #fff3b0, #ffc93c 45%, #e09b00) !important; }
+  .kart.altin .gorsel::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.75) 50%, transparent 70%);
+    background-size: 250% 100%; animation: parilti 2.4s linear infinite;
+  }
+  @keyframes parilti { from { background-position: 150% 0; } to { background-position: -100% 0; } }
+  .altin-etiket {
+    position: absolute; top: 12px; right: 12px; z-index: 1;
+    background: var(--koyu); color: #ffd23f; font-size: 0.72rem; font-weight: 800;
+    letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 999px;
+  }
+
+  .konfeti-tuval { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+  .bildirim {
+    position: fixed; left: 50%; bottom: 24px; z-index: 60;
+    transform: translate(-50%, 140%); opacity: 0;
+    background: var(--koyu); color: #fff; border-radius: 18px; padding: 14px 20px;
+    box-shadow: 0 14px 40px rgba(27, 16, 51, 0.35);
+    display: flex; align-items: center; gap: 12px; max-width: calc(100% - 32px); width: max-content;
+    transition: transform 0.4s cubic-bezier(.2,1.4,.4,1), opacity 0.3s;
+  }
+  .bildirim.goster { transform: translate(-50%, 0); opacity: 1; }
+  .bildirim .ikon { font-size: 1.8rem; }
+  .bildirim b { display: block; color: var(--sari); }
+  .bildirim small { opacity: 0.85; }
+
+  .ilerleme { font-size: 0.8rem; color: var(--gri); font-weight: 600; }
+  .ilerleme.tamam { color: var(--mor); }
+
+  .kosan-ayakkabi { position: fixed; left: 0; width: 160px; z-index: 55; pointer-events: none; animation: kos 1.8s cubic-bezier(.5,0,.6,1) forwards; }
+  .kosan-ayakkabi svg { width: 100%; filter: drop-shadow(0 8px 8px rgba(0,0,0,0.25)); animation: adim 0.18s ease-in-out infinite alternate; }
+  .kosan-ayakkabi svg path:nth-of-type(1) { fill: var(--sari); }
+  @keyframes kos { from { transform: translateX(-200px); } to { transform: translateX(calc(100vw + 40px)); } }
+  @keyframes adim { from { transform: rotate(-6deg) translateY(0); } to { transform: rotate(4deg) translateY(-12px); } }
+  body.kosu-modu .kart .gorsel svg { animation: adim 0.22s ease-in-out infinite alternate; }
+  body.kosu-modu header { animation: renkDon 1.2s linear infinite; }
+  @keyframes renkDon { to { filter: hue-rotate(360deg); } }
+  .sarsinti { animation: sars 0.45s; }
+  @keyframes sars { 20% { transform: translate(-6px, 2px); } 40% { transform: translate(5px, -3px); } 60% { transform: translate(-4px, 3px); } 80% { transform: translate(3px, -1px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pencere .gorsel svg.zipla, .kart.altin .gorsel::after, body.kosu-modu .kart .gorsel svg,
+    body.kosu-modu header, .sarsinti, .kosan-ayakkabi svg { animation: none; }
+  }
 </style>
 </head>
 <body>
@@ -439,6 +508,229 @@
 
   filtreleriCiz();
   urunleriCiz();
+</script>
+<script>
+  // ===== SÜRPRİZLER (Claude) =====
+  // Mevcut koda dokunmadan üstüne eklenen eğlenceli detaylar.
+  (() => {
+    const azHareket = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // --- Ses efektleri (WebAudio, dosya yok) ---
+    let ses = null;
+    function sesCal(notalar, tur = "sine", sure = 0.12, sesSeviyesi = 0.08) {
+      try {
+        ses = ses || new (window.AudioContext || window.webkitAudioContext)();
+        if (ses.state === "suspended") ses.resume();
+        notalar.forEach((frekans, i) => {
+          const t = ses.currentTime + i * sure;
+          const osc = ses.createOscillator();
+          const kazanc = ses.createGain();
+          osc.type = tur;
+          osc.frequency.setValueAtTime(frekans, t);
+          kazanc.gain.setValueAtTime(sesSeviyesi, t);
+          kazanc.gain.exponentialRampToValueAtTime(0.0001, t + sure * 1.6);
+          osc.connect(kazanc).connect(ses.destination);
+          osc.start(t);
+          osc.stop(t + sure * 1.7);
+        });
+      } catch (e) { /* ses desteklenmiyorsa sessizce geç */ }
+    }
+    const gicirti = () => sesCal([1400, 2100], "triangle", 0.05, 0.05);
+    const zafer = () => sesCal([523, 659, 784, 1047], "square", 0.11, 0.04);
+    const altinSes = () => sesCal([988, 1319, 1568, 1976, 2637], "sine", 0.08, 0.07);
+
+    // --- Konfeti ---
+    function konfeti(adet = 140, renkler = ["#ff6b2c", "#ff2e7e", "#7b2ff7", "#00b4ff", "#ffd23f", "#2ee59d"]) {
+      if (azHareket) return;
+      const tuval = document.createElement("canvas");
+      tuval.className = "konfeti-tuval";
+      document.body.appendChild(tuval);
+      const ctx = tuval.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      tuval.width = innerWidth * dpr; tuval.height = innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+      const parcalar = Array.from({ length: adet }, () => ({
+        x: innerWidth / 2 + (Math.random() - 0.5) * 120,
+        y: innerHeight * 0.6,
+        vx: (Math.random() - 0.5) * 14,
+        vy: -Math.random() * 16 - 6,
+        boy: Math.random() * 8 + 5,
+        aci: Math.random() * Math.PI,
+        donus: (Math.random() - 0.5) * 0.4,
+        renk: renkler[Math.floor(Math.random() * renkler.length)]
+      }));
+      const bas = performance.now();
+      (function kare(simdi) {
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        parcalar.forEach(p => {
+          p.vy += 0.35; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.aci += p.donus;
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.aci);
+          ctx.fillStyle = p.renk; ctx.fillRect(-p.boy / 2, -p.boy / 4, p.boy, p.boy / 2);
+          ctx.restore();
+        });
+        if (simdi - bas < 3200) requestAnimationFrame(kare); else tuval.remove();
+      })(bas);
+    }
+
+    // --- Bildirim (rozet) ---
+    let bildirimZaman;
+    function bildirim(ikon, baslik, metin) {
+      let kutu = document.querySelector(".bildirim");
+      if (!kutu) {
+        kutu = document.createElement("div");
+        kutu.className = "bildirim";
+        kutu.setAttribute("role", "status");
+        document.body.appendChild(kutu);
+      }
+      kutu.innerHTML = `<span class="ikon">${ikon}</span><div><b>${baslik}</b><small>${metin}</small></div>`;
+      requestAnimationFrame(() => kutu.classList.add("goster"));
+      clearTimeout(bildirimZaman);
+      bildirimZaman = setTimeout(() => kutu.classList.remove("goster"), 3800);
+    }
+
+    function sars() {
+      if (azHareket) return;
+      document.body.classList.remove("sarsinti");
+      void document.body.offsetWidth;
+      document.body.classList.add("sarsinti");
+      setTimeout(() => document.body.classList.remove("sarsinti"), 500);
+    }
+
+    // --- 1) Nadir ALTIN AYAKKABI: her ziyarette ~%25 şans (?altin ile garanti) ---
+    const altinVar = location.search.includes("altin") || Math.random() < 0.25;
+    const altinIndeks = Math.floor(Math.random() * urunler.length);
+    let altinBulundu = false;
+    function altinUygula() {
+      if (!altinVar) return;
+      const kart = izgara.querySelector(`.kart[data-i="${altinIndeks}"]`);
+      if (!kart || kart.classList.contains("altin")) return;
+      kart.classList.add("altin");
+      const g = kart.querySelector(".gorsel");
+      if (g) g.insertAdjacentHTML("beforeend", `<span class="altin-etiket">✨ Efsane</span>`);
+    }
+    new MutationObserver(() => { altinUygula(); ilerlemeGoster(); }).observe(izgara, { childList: true });
+
+    // --- 2) KOLEKSİYONCU rozeti: tüm modelleri incele ---
+    const gorulenler = new Set();
+    let koleksiyonTamam = false;
+    function ilerlemeGoster() {
+      let el = document.querySelector(".ilerleme");
+      if (!el) {
+        el = document.createElement("span");
+        el.className = "ilerleme";
+        document.querySelector(".arac-cubugu").appendChild(el);
+      }
+      el.textContent = koleksiyonTamam
+        ? "🏅 Koleksiyoncu rozeti kazanıldı!"
+        : `👟 İncelenen: ${gorulenler.size}/${urunler.length}`;
+      el.classList.toggle("tamam", koleksiyonTamam);
+    }
+
+    // Detay penceresini sarmala: mevcut detayAc'ı çağırıp üstüne süs ekle
+    const asilDetayAc = detayAc;
+    detayAc = function (i) {
+      asilDetayAc(i);
+
+      // Numara rozetlerini seçilebilir yap -> ayakkabı zıplar
+      pencere.querySelectorAll(".rozet").forEach(r => {
+        r.classList.add("secilebilir");
+        r.setAttribute("role", "button");
+        r.tabIndex = 0;
+        const sec = () => {
+          pencere.querySelectorAll(".rozet").forEach(x => x.classList.remove("secili"));
+          r.classList.add("secili");
+          ayakkabiZiplat();
+        };
+        r.addEventListener("click", sec);
+        r.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sec(); } });
+      });
+
+      if (altinVar && i === altinIndeks) {
+        const g = pencere.querySelector(".gorsel");
+        g.style.background = "linear-gradient(135deg, #fff3b0, #ffc93c 45%, #e09b00)";
+        if (!altinBulundu) {
+          altinBulundu = true;
+          altinSes(); sars();
+          konfeti(180, ["#ffd23f", "#ffc93c", "#fff3b0", "#e09b00", "#ffffff"]);
+          bildirim("🏆", "Efsane Altın Ayakkabıyı buldun!", "Her ziyarette görünmez, şanslı günündesin.");
+        }
+      }
+
+      gorulenler.add(i);
+      if (!koleksiyonTamam && gorulenler.size === urunler.length) {
+        koleksiyonTamam = true;
+        setTimeout(() => {
+          zafer(); konfeti();
+          bildirim("🏅", "Koleksiyoncu rozeti!", "Tüm modelleri inceledin. Gerçek bir sneaker avcısısın!");
+        }, 350);
+      }
+      ilerlemeGoster();
+    };
+
+    function ayakkabiZiplat() {
+      gicirti();
+      const g = pencere.querySelector(".gorsel");
+      const svg = g && g.querySelector("svg");
+      if (!svg) return;
+      svg.classList.remove("zipla");
+      svg.getBoundingClientRect(); // animasyonu yeniden başlatmak için reflow
+      svg.classList.add("zipla");
+      if (azHareket) return;
+      const kutu = g.getBoundingClientRect(), s = svg.getBoundingClientRect();
+      for (let k = 0; k < 10; k++) {
+        const t = document.createElement("span");
+        t.className = "toz";
+        t.style.left = (s.left - kutu.left + s.width / 2) + "px";
+        t.style.top = (s.bottom - kutu.top - 12) + "px";
+        t.style.setProperty("--dx", ((Math.random() - 0.5) * 160) + "px");
+        t.style.setProperty("--dy", (-Math.random() * 40) + "px");
+        setTimeout(() => { g.appendChild(t); setTimeout(() => t.remove(), 750); }, 330);
+      }
+    }
+
+    // --- 3) Gizli KOŞU MODU: Konami kodu veya logoya 5 hızlı dokunuş ---
+    let kosuAktif = false;
+    function kosuModu() {
+      if (kosuAktif) return;
+      kosuAktif = true;
+      document.body.classList.add("kosu-modu");
+      zafer(); sars(); konfeti(200);
+      bildirim("⚡", "Gizli Koşu Modu açıldı!", "Ayakkabılar yerinde duramıyor...");
+      if (!azHareket) {
+        [0.18, 0.5, 0.78].forEach((y, k) => setTimeout(() => {
+          const a = document.createElement("div");
+          a.className = "kosan-ayakkabi";
+          a.style.top = (innerHeight * y) + "px";
+          a.innerHTML = ayakkabiSvg;
+          document.body.appendChild(a);
+          setTimeout(() => a.remove(), 1900);
+          gicirti();
+        }, k * 260));
+      }
+      setTimeout(() => { document.body.classList.remove("kosu-modu"); kosuAktif = false; }, 6000);
+    }
+
+    const konami = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    let konamiSira = 0;
+    document.addEventListener("keydown", e => {
+      const tus = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+      konamiSira = tus === konami[konamiSira] ? konamiSira + 1 : (tus === konami[0] ? 1 : 0);
+      if (konamiSira === konami.length) { konamiSira = 0; kosuModu(); }
+    });
+
+    const logo = document.querySelector(".logo");
+    let tiklar = [];
+    logo.addEventListener("click", () => {
+      const simdi = Date.now();
+      tiklar = tiklar.filter(t => simdi - t < 1500).concat(simdi);
+      logo.classList.remove("tikla"); void logo.offsetWidth; logo.classList.add("tikla");
+      gicirti();
+      if (tiklar.length >= 5) { tiklar = []; kosuModu(); }
+    });
+
+    altinUygula();
+    ilerlemeGoster();
+  })();
 </script>
 </body>
 </html>
